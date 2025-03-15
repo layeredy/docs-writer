@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lyrdy/docs (writer)</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="https://cdn.layeredy.com/webp/logo.webp" type="image/webp">
+</head>
+<body>
+    <div class="container">
+        <div class="doc-panel">
+            <div class="panel-header">
+                <h2>docs (writer)</h2>
+            </div>
+            <div class="doc-filter">
+                <div class="custom-select">
+                    <select id="category-filter">
+                        <option value="all">All Categories</option>
+                    </select>
+                </div>
+            </div>
+            <div class="doc-list" id="doc-list">
+            </div>
+            <div class="panel-actions">
+                <button class="btn" id="btn-new">New</button>
+                <button class="btn" id="btn-import">Import</button>
+                <button class="btn" id="btn-export">Export</button>
+            </div>
+        </div>
+        
+        <div class="content-panel">
+            <div class="tab-header">
+                <div class="tab active" data-tab="editor">Editor</div>
+                <div class="tab" data-tab="preview">Preview</div>
+            </div>
+            <div class="editor-preview-container">
+                <div class="editor-container" id="editor-container">
+                    <form class="editor-form" id="editor-form">
+                        <div class="form-group">
+                            <label for="doc-category">Category</label>
+                            <input type="text" id="doc-category" list="categories" required>
+                            <datalist id="categories">
+                            </datalist>
+                        </div>
+                        <div class="form-group">
+                            <label for="doc-title">Title</label>
+                            <input type="text" id="doc-title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="doc-url">URL</label>
+                            <input type="text" id="doc-url">
+                        </div>
+                        <div class="form-group">
+                            <label for="doc-content">Content (Markdown)</label>
+                            <textarea id="doc-content" required></textarea>
+                        </div>
+                        <div class="editor-actions">
+                            <button type="button" class="btn btn-delete" id="btn-delete">Delete</button>
+                            <button type="submit" class="btn btn-save" id="btn-save">Save</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="preview-container" id="preview-container">
+                    <div class="preview-wrapper">
+                        <h1 class="preview-title" id="preview-title">Select a document.</h1>
+                        <div class="preview-content" id="preview-content">
+                            <p>Select or create a document to see the preview.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>Copyright &copy; 2025 <a href="https://layeredy.com" style="text-decoration: none; color: inherit;">Layeredy Software</a> | <a href="/LICENSE" style="text-decoration: none; color: inherit;">View License</a></p>
+    </div>
+    
+    <div class="toast-container" id="toast-container"></div>
+    
+    <div class="modal-overlay" id="import-modal-overlay">
+        <div class="modal" id="import-modal">
+            <div class="modal-header">
+                <h2>Import JSON</h2>
+                <span class="modal-close" id="import-modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p id="import-error" style="color: var(--danger-color); margin-bottom: 15px;"></p>
+                <div class="form-group">
+                    <div class="custom-file-input">
+                        <label for="import-file">
+                            <span>Choose JSON file or drag it here</span>
+                            <div class="file-name" id="file-name">No file selected</div>
+                        </label>
+                        <input type="file" id="import-file" accept=".json">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" id="btn-import-cancel">Cancel</button>
+                <button class="btn" id="btn-import-submit">Import</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal-overlay" id="confirm-modal-overlay">
+        <div class="modal" id="confirm-modal">
+            <div class="modal-header">
+                <h2 id="confirm-title">Confirm Action</h2>
+                <span class="modal-close" id="confirm-modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p id="confirm-message">Are you sure you want to perform this action?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" id="btn-confirm-cancel">Cancel</button>
+                <button class="btn btn-delete" id="btn-confirm-ok">Confirm</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal-overlay" id="merge-modal-overlay">
+        <div class="modal" id="merge-modal">
+            <div class="modal-header">
+                <h2>Import Options</h2>
+                <span class="modal-close" id="merge-modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>How would you like to import the documents?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" id="btn-merge">Merge with existing</button>
+                <button class="btn" id="btn-replace">Replace all</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
